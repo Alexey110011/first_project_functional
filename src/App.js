@@ -1,25 +1,39 @@
-import logo from './logo.svg';
+import * as React from "react"
+import {useContext,createContext, useState} from 'react'
 import './App.css';
+import Map1 from'./Map.js'
+import {Diary1} from'./Diary.js'
+import {Routes,
+        Route,
+        Link        
+    } from "react-router-dom"
+import {Tablo} from './Tablo.js'
+export const Context = createContext("101")
+
 
 function App() {
-  return (
+ /* const [cloudness, setCloudness] = useState(false)
+  const ctx = {
+  toggleTheme:()=> {
+    setCloudness(!cloudness)
+  },
+  theme: cloudness? "Убрать облака" : "Показать облака",
+  }*/
+
+   return (
+    
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+<Routes>
+  <Route path = "/" element = {<Tablo/>}/>
+  <Route path = "map" element = {<Map1/>}/>
+</Routes>
+</div>
+ );
 }
+<>
+<nav>
+  <Link to ="/map">Maps</Link>
+</nav>
+</>
 
 export default App;
