@@ -517,9 +517,9 @@ const [cloudness, setCloudness] = useState(false)
       setSysState(sys)
       setCloudsState(clouds)
   }
-    useEffect(()=> {
+    /*useEffect(()=> {
       getWind()
-    },[])
+    },[])*/
   
   function addPoint(a,b) {
   const point1 = line2(a,b)
@@ -574,7 +574,7 @@ const [cloudness, setCloudness] = useState(false)
 
    function showPlace(place,z) {
      const liv = line5(place,z)
-     setLiv(liv)
+    setLiv(liv)
    }
 
      function showJour(gt) {
@@ -625,7 +625,7 @@ const [cloudness, setCloudness] = useState(false)
         arr3.map(i=>document.getElementById(i).style.opacity='1')
         }
         setCloudness(true)
-        console.log(setCloudness)
+        //console.log(setCloudness)
       }
 
         function handleClouds(){
