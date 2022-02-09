@@ -1,6 +1,4 @@
-import {arrayEmp, remDiv1} from './Map.js'
 import {Link} from 'react-router-dom'
-
 
 
 export function Tablo() {
@@ -31,43 +29,37 @@ export function Tablo() {
             console.log(i);
           }})
       
-        for (let i = 0;i<5;i++) {
-        let front1 = document.createElement('div')
-        front1.className='front1'
-        front1.id='front1'
-        document.body.appendChild(front1)
-      }
-        let tran1 = document.getElementsByClassName('front1')
-        for (let i=0;i<tran1.length;i++) {
-          tran1[i].setAttribute('id',i)
-          tran1[i].style.opacity='0'
-          tran1[i].style.transitionProperty ='opacity'
-          tran1[i].style.transitionProperty ='transform'
-          tran1[i].style.transitionDelay =`0.5s`   
-          tran1[i].style.transitionDuration ='1s'
-          let arrayVokrug1 = ['С', 'В','Е','Т','А']
-          tran1[i].innerHTML=arrayVokrug1[i]
+          for (let i = 0;i<5;i++) {
+          let front1 = document.createElement('div')
+          front1.className='front1'
+          front1.id='front1'
+          document.body.appendChild(front1)
         }
-       
-                 
-              window.addEventListener('load', function() {
+          let tran1 = document.getElementsByClassName('front1')
+          for (let i=0;i<tran1.length;i++) {
+            tran1[i].setAttribute('id',i)
+            tran1[i].style.opacity='0'
+            tran1[i].style.transitionProperty ='opacity'
+            tran1[i].style.transitionProperty ='transform'
+            tran1[i].style.transitionDelay =`0.5s`   
+            tran1[i].style.transitionDuration ='1s'
+            let arrayVokrug1 = ['С', 'В','Е','Т','А']
+            tran1[i].innerHTML=arrayVokrug1[i]
+          }
+                         
+          window.addEventListener('load', function() {
           for (let i =0;i<tran1.length;i++) {
             tran1[i].style.opacity = '1'
             tran1[i].style.transform = 'translateX(50px)'
             tran1[i].style.transitionDelay  ='12s'
           }
       })
-      
-        let calendar1;
-        for (let i = 0;i<arrayEmp.length; i++) {
-            calendar1=arrayEmp.map((i, index)=>i)
-        }
-    
+        
     return (
       <>
       <div id='fon'>
       <nav>
-    <Link to="/map">Map</Link>
+    <Link to="/map">Полет</Link>
   </nav>
   
         <div id = "markers1"> 

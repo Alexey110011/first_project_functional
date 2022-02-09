@@ -1,4 +1,4 @@
-import React, { useState , useEffect} from 'react'
+import React, {useState , useEffect} from 'react'
 
 let x;
 let y;
@@ -7,7 +7,6 @@ let b;
 let day =0;
 let calendar=0;
 let distance;
-//let place;
 let name1;
 let country1;
 let lat = a;
@@ -120,8 +119,7 @@ function go(deg, speed) {
   y=0
   }
   distance=(speed*86.4).toFixed(1)
-  
-  return [x,y,distance]
+    return [x,y,distance]
  }
     
  async function fetchWind() {
@@ -230,7 +228,7 @@ async function line2(a,b) {
   
   async function line7(gt) {
         try {
-        let response = await fetch(`https://www.mapquestapi.com/staticmap/v5/map?locations=${arrayArc[0]},${arrayArc[1]}||${arrayArc[gt*2]},${arrayArc[gt*2+1]}&size=550,550@2x&"marker-7B0099"&marker-end&key=dDGK8sCXjbWcbowd7oVsGzyptmQpGLi4`)
+        let response = await fetch(`https://www.mapquestapi.com/staticmap/v5/map?locations=${arrayArc[0]},${arrayArc[1]}||${arrayArc[gt*2]},${arrayArc[gt*2+1]}&size=550,550@2x&marker-start&marker-end&key=dDGK8sCXjbWcbowd7oVsGzyptmQpGLi4`)
         let blob = await response.blob()
         let img = document.createElement('img')
         document.body.append(img)
@@ -242,6 +240,7 @@ async function line2(a,b) {
         alert(err)
     }
   }
+
   function calculate(gt) {
     let lt1, lt2, ln1, ln2
     lt1=arrayArc[0]
@@ -254,23 +253,22 @@ async function line2(a,b) {
     let lon1 = ln1*Math.PI/180
     let lon2 = ln2*Math.PI/180;
 
-  let clt1 = Math.cos(lat1)
-  let clt2 = Math.cos(lat2)
-  let slt1 = Math.sin(lat1)
-  let slt2 = Math.sin(lat2)
-  let delta = lon2-lon1
-  let cdelta = Math.cos(delta)
-  let sdelta = Math.sin(delta);
+    let clt1 = Math.cos(lat1)
+    let clt2 = Math.cos(lat2)
+    let slt1 = Math.sin(lat1)
+    let slt2 = Math.sin(lat2)
+    let delta = lon2-lon1
+    let cdelta = Math.cos(delta)
+    let sdelta = Math.sin(delta);
 
-  let y = Math.sqrt(Math.pow(clt2*sdelta,2)+Math.pow((clt1*slt2*cdelta-slt1*clt2*cdelta),2))
-  let x = slt1*slt2+clt1*clt2*cdelta;
-  let ad = Math.atan2(y,x)
-  let dist = (ad*6372.795).toFixed(1)
-  console.log(dist, delta)
-  return dist
+    let y = Math.sqrt(Math.pow(clt2*sdelta,2)+Math.pow((clt1*slt2*cdelta-slt1*clt2*cdelta),2))
+    let x = slt1*slt2+clt1*clt2*cdelta;
+    let ad = Math.atan2(y,x)
+    let dist = (ad*6372.795).toFixed(1)
+    console.log(dist, delta)
+    return dist
   }
  
-  
   const AddPoint = ({onNewPoint=f=>f, onFirstPlace=f=>f})=> {
     let _lt, _ln
     const submit = e => {
@@ -300,7 +298,7 @@ const Zoom = ({onNewSize})=> {
    e.preventDefault()
    onNewSize(_z.value)
    return _z
-  // _a.focus()
+  
  }
  return (
    <form onSubmit = {submit}>
@@ -373,17 +371,16 @@ const Place = ({onNewPlace})=> {
         <div>
           <div> Всего расстояние: {d}</div>
           <div>Всего дней: {j}</div>
-          <div>Средняя скорость: {v}</div>
+          <div>Среднедневной перелет: {v}</div>
       </div>)
 }
    
-
-  export const Shylda = ({days}) => {
+export const Shylda = ({days}) => {
     for (let i = 0;i<days.length; i++) {
   name1 = days[i].name;
   country1 = days[i].country }
   return (
-  <div> {country1}   {name1} </div>)
+  <div> {country1} {name1} </div>)
   }
 
 export const Jour = ({onJour=f=>f, onDist=f=>f,dist1})=> {
@@ -403,109 +400,27 @@ let _jour
       </div>)
 }
 
-export const Tablo=({arr}) => { 
-  for (let i = 0;i<6;i++) {
-  let front = document.createElement('div')
-  front.className='front'
-  front.id='front'
-  document.body.appendChild(front)
-}
 
-let tran = document.getElementsByClassName('front')
-  for (let i=0;i<tran.length;i++) {
-    tran[i].setAttribute('id',i)
-    tran[i].style.opacity='0'
-    tran[i].style.transitionProperty ='opacity'
-    tran[i].style.transitionProperty ='transform'
-    tran[i].style.transitionDelay =`0.5s`   
-    tran[i].style.transitionDuration ='1s'
-    let arrayVokrug = ['В','О','К','Р','У','Г']
-    tran[i].innerHTML=arrayVokrug[i]
-  }
-
-     window.addEventListener('load', function() {
-    for (let i =0;i<tran.length;i++) {
-      tran[i].style.opacity = '1'
-      tran[i].style.transform = 'rotateY(-360deg)'
-      tran[i].style.transitionDelay =`${2*i}s`
-      console.log(i);
-      
-  }})
-
-  for (let i = 0;i<5;i++) {
-  let front1 = document.createElement('div')
-  front1.className='front1'
-  front1.id='front1'
-  document.body.appendChild(front1)
-}
-  let tran1 = document.getElementsByClassName('front1')
-  for (let i=0;i<tran1.length;i++) {
-    tran1[i].setAttribute('id',i)
-    tran1[i].style.opacity='0'
-    tran1[i].style.transitionProperty ='opacity'
-    tran1[i].style.transitionProperty ='transform'
-    tran1[i].style.transitionDelay =`0.5s`   
-    tran1[i].style.transitionDuration ='1s'
-    let arrayVokrug1 = ['С', 'В','Е','Т','А']
-    tran1[i].innerHTML=arrayVokrug1[i]
-  }
- 
-           
-        window.addEventListener('load', function() {
-    for (let i =0;i<tran1.length;i++) {
-      tran1[i].style.opacity = '1'
-      tran1[i].style.transform = 'translateX(50px)'
-      tran1[i].style.transitionDelay  ='12s'
-    }
-})
-
-    return(
-<div id = "markers1"> 
-<div className ='marker_red'></div> 
-<div className ='marker_black'></div> 
-<div className ='marker_blue'></div>
-<div className ='marker_yellow'></div>   
-<div className ='marker_green'></div>   
-</div>)    
-}
-
-
-export default function Map1() {
-const [res,setRes] =useState() 
-const [srcState, setSrcState] = useState()
+export default function Map() {
 const [windState, setWindState] = useState({})
-const [temp1, setTemp1] = useState()
+const [temp1, setTemp1] = useState(null)
 const [sysState, setSysState] = useState({})
-const [point, setPoint] = useState()
-const [picture, setPicture] = useState()
-const [largePicture, setLargePicture] = useState()
-const [liv, setLiv] = useState()
-//const [counter, setCounter] = useState()
 const [cloudsState, setCloudsState]= useState({})
 const [days1, setDays1] = useState([])
 const [nameState, setNameState] = useState()
-const [jour, setJour] = useState()
 const [dist, setDist] = useState()
 const [cloudness, setCloudness] = useState(false)
 
-    /*function addCoords() {
-    let res1= nextValue()
-    setRes({res1})
-    return res1
-            }*/
-        
+            
     async function changePicture() {
-    const src =line()
-    setSrcState(src)
+    line()
     }    
-
+   
    async function getWind() {
       const {wind, main,clouds,sys, name} = await fetchWind()
-      const{speed,deg, gust}=wind
+      const{speed,deg}=wind
       const {temp} = main
-      const {country} = sys
       const temp1 = (temp -273.15).toFixed(1)
-      const {all} = clouds
       go(deg,speed)
       console.log(x,y,distance)
       console.log(deg)
@@ -517,27 +432,24 @@ const [cloudness, setCloudness] = useState(false)
       setSysState(sys)
       setCloudsState(clouds)
   }
-    /*useEffect(()=> {
+    useEffect(()=> {
       getWind()
-    },[])*/
+    },[])
   
   function addPoint(a,b) {
-  const point1 = line2(a,b)
-  lat=a
-  lon=b
-  array.push(`${a},`)
-  array.push(b)
-  arrayArc.push(parseFloat(a))
-  arrayArc.push(parseFloat(b))
-  if(a>0) {alert(`Окружность Земли на этой широте составляет примерно ${parseFloat(40030-a*40030/90).toFixed(0)} км`)
-  }else{alert(`Окружность Земли на этой широте составляет примерно ${parseFloat(40030+a*40030/90).toFixed(0)} км`)}
-  console.log(lat, lon)
-  console.log(a,b)
-  setPoint(point1)
-   }
+    line2(a,b)
+    lat=a
+    lon=b
+    array.push(`${a},`)
+    array.push(b)
+    arrayArc.push(parseFloat(a))
+    arrayArc.push(parseFloat(b))
+    console.log(lat, lon)
+    console.log(a,b)
+    }
  
    async function showPicture() {
-     const picture = line3()
+    line3()
      const {clouds, sys,name} =  await fetchWind();
      const {country} = sys
      const {all} = clouds
@@ -560,26 +472,21 @@ const [cloudness, setCloudness] = useState(false)
     }
       console.log(days)
       console.log(arrayArc[0], lat, lon)
-   setSysState(sys)
-   setPicture(picture)
-   setDays1(days)
-   setCloudsState(clouds)
+      setSysState(sys)
+      setDays1(days)
+      setCloudsState(clouds)
  }
-
-
-   function showLargePicture(z) {
-     const largePicture = line4(z)
-     setLargePicture(largePicture)
-   }
-
+ 
+  function showLargePicture(z) {
+    line4(z)
+    }
+  
    function showPlace(place,z) {
-     const liv = line5(place,z)
-    setLiv(liv)
-   }
+    line5(place,z)
+  }
 
      function showJour(gt) {
-     const jour = line7(gt)
-     setJour(jour)
+     line7(gt)
      }
 
     function showDist(gt) {
@@ -599,34 +506,33 @@ const [cloudness, setCloudness] = useState(false)
     }
     
     function withClouds() {
-    for (let i=0; i<100;i++) {
-     let td =  document.getElementsByTagName('td')[i].setAttribute('id',i)
-      } 
-      for (let i = 0;i<100;i++) {
-        document.getElementById(i).style.opacity=0
-        document.getElementById(i).style.transitionProperty = 'opacity'
-        document.getElementById(i).style.transitionDuration ="3.5s"
-        }
-      let arr2= [];
-      let arr3 = []
-      for (let f = 0;f<100;f++) {
-      arr2.push(f)
-    }
-      console.log(arr2)
-      for (let i=0;i<`${cloud}`;i++) {
-        let r = Math.floor(Math.random()*arr2.length)
-        arr3.push(arr2[r])
-        arr2.splice(r,1)
-        console.log(arr3)
-        console.log(cloud)
+      for (let i=0; i<100;i++) {
+      let td =  document.getElementsByTagName('td')[i].setAttribute('id',i)
+        } 
+        for (let i = 0;i<100;i++) {
+          document.getElementById(i).style.opacity=0
+          document.getElementById(i).style.transitionProperty = 'opacity'
+          document.getElementById(i).style.transitionDuration ="3.5s"
+          }
+        let arr2= [];
+        let arr3 = []
+        for (let f = 0;f<100;f++) {
+        arr2.push(f)
       }
+        console.log(arr2)
+        for (let i=0;i<`${cloud}`;i++) {
+          let r = Math.floor(Math.random()*arr2.length)
+          arr3.push(arr2[r])
+          arr2.splice(r,1)
+          console.log(arr3)
+          console.log(cloud)
+        }
     
       for (let i=0;i<arr3.length+1;i++) {
         arr3.map(i=>document.getElementById(i).style.opacity='1')
         }
         setCloudness(true)
-        //console.log(setCloudness)
-      }
+        }
 
         function handleClouds(){
           (cloudness)?clean():withClouds()
@@ -672,15 +578,13 @@ const [cloudness, setCloudness] = useState(false)
         <button id = 'mesto' onClick = {showPicture}>Пункт прибытия</button>
         <button id = "withClouds" onClick = {handleClouds}>Облака</button>
         </div>
-        
-
         <div className = "zoom"><Zoom onNewSize={showLargePicture}/></div>
         <div id="placeWatch"><Place onNewPlace = {showPlace}/></div>
             <div className="coord">Координаты: 
             <span>{lat},{lon}</span>
         </div>
                       
-          <div className = {(temp1<-10)?"weather winter":(temp1>-10&&temp1<-5)?"weather autumn":(temp1>-5&&temp1<15)?"weather spring":(temp1>15&&temp1<30)?"weather summer":(temp1>30&&temp1<40)?"weather thirty_five":(temp1>40&&temp1<60)?"weather zacuha":"none1"} style = {{backgroundRepeat:'no-repeat'}}></div> 
+          <div className = {(temp1<-10||temp1===-10)?"weather winter":(temp1>-10&&(temp1<-5||temp1===-5))?"weather autumn":(temp1>-5&&temp1<15)?"weather spring":((temp1===15||temp1>15)&&temp1<30)?"weather summer":((temp1===30||temp1>30)&&temp1<40)?"weather thirty_five":((temp1===40||temp1>40)&&temp1<60)?"weather zacuha":"none"} style = {{backgroundRepeat:'no-repeat'}}></div> 
           <div className = 'term'>
           <div className = "scale" style={{marginLeft:'28px', marginBottom:'49px',height:`${(temp1<0)?(64.57+temp1*1.614):(64.57+temp1*1.614)}px`,width:'4px',backgroundColor:'red',  opacity:'0.7', transitionProperty:'height', transitionDuration:'2s'}}>   </div>
           </div>          
@@ -690,10 +594,11 @@ const [cloudness, setCloudness] = useState(false)
             <div className = "name"> Место  {nameState}</div>
             <div>Ветер <span className = {(windState.speed>0&&windState.speed<5)?"weak":(windState.speed<10)?"moderate":(windState.speed<18)?"strong":(windState.speed<25)?"storm":(windState.speed>25&&windState.speed<40)?"hurricane":"standart"}> {windState.speed}</span></div>
             <div>Направление {windState.deg}</div>
-            <div>Температура <span className = {(temp1<-30)?"ice":(temp1<25)?"froze":(temp1<20)?"very_cold":(temp1<15)?"cold":(temp1<-10||temp1==-10)?"very_cool":(temp1<-5)?"oool":(temp1<0)?"cool":(temp1>0&&temp1<5)?"zero":(temp1>5&&temp1<15)?"light_warm":(temp1>15&&temp1<25)?"warm":(temp1>25&&temp1<30)?"hot":(temp1>30&&temp1<58)?"heat":"standart"}>{temp1}</span></div>
+            <div>Температура <span className = {(temp1<-30)?"ice":(temp1<25)?"froze":(temp1<20)?"very_cold":(temp1<15)?"cold":(temp1<-10||temp1===-10)?"very_cool":(temp1<-5)?"oool":(temp1<0)?"cool":(temp1>0&&temp1<5)?"zero":(temp1>5&&temp1<15)?"light_warm":(temp1>15&&temp1<25)?"warm":(temp1>25&&temp1<30)?"hot":(temp1>30&&temp1<58)?"heat":"standart"}>{temp1}</span></div>
           </div>
-
-            <div id = "ramka1"></div>
+           <div id="punkt">Пункт прибытия</div>
+           <div id = "neighbours">По карте</div>
+           <div id = "ramka1"></div>
             <div id = "ramka2"></div>
             <Calendar days = {days1}/>
             <div id="clouds">Облачность:{cloudsState.all}% </div>  
@@ -706,11 +611,9 @@ const [cloudness, setCloudness] = useState(false)
             <div className="statistics">
             <Diary days = {days1}/>
             <div id ='average'><Average days={days1}/></div>
-          
-           <div className = 'jour'><Jour onJour = {showJour} onDist ={showDist} dist1 = {dist}/></div> 
+            <div className = 'jour'><Jour onJour = {showJour} onDist ={showDist} dist1 = {dist}/></div> 
            </div>
       </div>
-      
-        )
+      )
     }
 
